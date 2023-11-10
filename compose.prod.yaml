@@ -19,7 +19,7 @@ services:
       DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=mariadb-10.3.38&charset=utf8mb4
     networks:
       - default
-      - net-pastis-hosting-docker_public
+      - public
     labels:
       - traefik.docker.network=net-pastis-hosting-docker_public
       - traefik.enable=true
