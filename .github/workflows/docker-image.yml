@@ -17,7 +17,7 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    # trunk-ignore(checkov/CKV2_GHA_1)
     permissions:
       contents: read
       packages: write
