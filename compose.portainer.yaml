@@ -9,3 +9,9 @@ services:
     ports: []
     environment:
       APP_SECRET: ${APP_SECRET}
+
+  db:
+    image: mariadb:10.3.38
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/mysql
