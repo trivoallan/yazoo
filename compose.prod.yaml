@@ -17,6 +17,7 @@ services:
       APP_ENV: prod
       APP_SECRET: ${APP_SECRET}
       DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=mariadb-10.3.38&charset=utf8mb4
+      CADDY_GLOBAL_OPTIONS: ${CADDY_GLOBAL_OPTIONS}
     networks:
       - default
       - public
