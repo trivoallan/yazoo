@@ -33,6 +33,8 @@ jobs:
           context: .
           push: false
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
+        env: 
+          IMAGES_PREFIX: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       -  
         name: Start services
         run: |
