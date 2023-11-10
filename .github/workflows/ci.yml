@@ -40,23 +40,14 @@ jobs:
         name: Start services
         run: |
           docker compose -f compose.yaml -f compose.override.yaml -f .devcontainer/compose.override.yaml up --wait --no-build db
-          sleep 30
+          sleep 15
           docker compose -f compose.yaml -f compose.override.yaml -f .devcontainer/compose.override.yaml up --wait --no-build php
-      -
-        name: Inspect services
-        if: always()
-        run: |
-          docker compose logs
       -
         name: Check HTTP reachability
         run: curl -v http://localhost
       -
         name: Check HTTPS reachability
         run: curl -vk https://localhost
-      -
-        name: Create test database
-        if: true # Remove this line if Doctrine ORM is installed
-        run: docker compose exec -T php bin/console doctrine:database:create
       -
         name: Run migrations
         if: true # Remove this line if Doctrine Migrations is installed
