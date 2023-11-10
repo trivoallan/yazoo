@@ -49,12 +49,12 @@ jobs:
           context: .
           push: false
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: ${{ steps.meta.outputs.labels }}         
   
       -  
         name: Run tests
         env: 
-          IMAGES_PREFIX: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          IMAGE_NAME: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         run: |
           docker compose -f compose.yaml -f compose.override.yaml -f .devcontainer/compose.override.yaml up --wait --no-build db
           sleep 15
