@@ -1,6 +1,8 @@
 {
     "recommendations": [
         "ms-vscode-remote.remote-containers",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "github.codespaces",
+        "formulahendry.vscode-mysql"
     ]
 }
