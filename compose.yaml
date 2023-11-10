@@ -3,7 +3,7 @@ version: "3.8"
 services:
   php:
     restart: unless-stopped
-    image: ${IMAGE_NAME-yazoo}:${IMAGE_TAG:-latest}
+    image: ${IMAGE_NAME-yazoo:latest}
     depends_on:
       - db
     build:
