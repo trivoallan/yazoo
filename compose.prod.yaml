@@ -5,8 +5,7 @@ networks:
   default:
     internal: true
   public:
-    external:
-      name: net-pastis-hosting-docker_public
+    name: net-pastis-hosting-docker_public
 
 services:
   php:
