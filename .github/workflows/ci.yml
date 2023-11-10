@@ -39,10 +39,9 @@ jobs:
       -
         name: Start services
         run:
-          docker compose -f compose.yaml -f compose.override.yaml -f .devcontainer/compose.override.yaml up --wait --no-build
-          docker inspect --format "{{json .State.Health }}"  yazoo-php-1
-          docker inspect --format "{{json .State.Health }}"  yazoo-db-1
-        continue-on-error: true
+          docker compose -f compose.yaml -f compose.override.yaml -f .devcontainer/compose.override.yaml up --wait --no-build;
+          docker inspect --format "{{json .State.Health }}"  yazoo-php-1;
+          docker inspect --format "{{json .State.Health }}"  yazoo-db-1;
       -
         name: Check HTTP reachability
         run: curl -v http://localhost
