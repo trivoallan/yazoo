@@ -31,6 +31,7 @@ jobs:
           files: |
             compose.yaml
             compose.override.yaml
+            .devcontainer/compose.override.yaml
           set: |
             *.cache-from=type=gha,scope=${{github.ref}}
             *.cache-from=type=gha,scope=refs/heads/main
@@ -40,17 +41,17 @@ jobs:
         run: docker compose up --wait --no-build
       -
         name: Check HTTP reachability
-        run: curl -v -o /dev/null http://localhost
+        run: curl -v -o /dev/null http://localhost:8000
       -
         name: Check HTTPS reachability
-        run: curl -vk -o /dev/null https://localhost
+        run: curl -vk -o /dev/null https://localhost:8443
       -
         name: Create test database
-        if: false # Remove this line if Doctrine ORM is installed
+        if: true # Remove this line if Doctrine ORM is installed
         run: docker compose exec -T php bin/console -e test doctrine:database:create
       -
         name: Run migrations
-        if: false # Remove this line if Doctrine Migrations is installed
+        if: true # Remove this line if Doctrine Migrations is installed
         run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
       -
         name: Run PHPUnit
