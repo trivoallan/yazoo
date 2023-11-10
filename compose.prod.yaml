@@ -9,7 +9,7 @@ services:
     ports: []
     environment:
       APP_SECRET: ${APP_SECRET}
-      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=8.0.34&charset=utf8mb4"
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=8.0.34&charset=utf8"
 
   db:
     image: mariadb:10.3.38
