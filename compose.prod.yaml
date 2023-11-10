@@ -1,43 +1,37 @@
-version: "3.4"
+version: '3.8'
 
 # Production environment override
+
 networks:
   default:
     internal: true
   public:
-    external: true
-    name: net-pastis-hosting-docker_public
+    external: ${TRAEFIK_ENABLE:-false}
+    name: ${TRAEFIK_NETWORK:-~}
 
 services:
   php:
     build:
       context: .
       target: frankenphp_prod
-    environment:
-      APP_ENV: prod
-      APP_SECRET: ${APP_SECRET}
-      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}?serverVersion=mariadb-10.3.38&charset=utf8mb4
-      CADDY_GLOBAL_OPTIONS: ${CADDY_GLOBAL_OPTIONS}
-      CADDY_EMAIL: ${CADDY_EMAIL}
     networks:
       - default
       - public
     labels:
-      - traefik.docker.network=net-pastis-hosting-docker_public
-      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:-~}
+      - traefik.enable=${TRAEFIK_ENABLE:-false}
       - traefik.http.routers.yazoo-php.entrypoints=http
-      - traefik.http.routers.yazoo-php.rule=Host(`yazoo.constructions-incongrues.net`)
+      - traefik.http.routers.yazoo-php.rule=Host(`${APP_HOSTNAME:-localhost}`)
+    env_file:
+      - etc/defaults.env
 
   db:
-    image: mariadb:10.3.38
+    image: mariadb:${MARIADB_VERSION:-10.8.38}
     restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
+    env_file:
+      - etc/defaults.env
 
 volumes:
   db_data: {}

@@ -15,6 +15,11 @@ FROM frankenphp_upstream AS frankenphp_base
 
 WORKDIR /app
 
+# trunk-ignore(checkov/CKV_DOCKER_8)
+USER root
+
+EXPOSE 80 443
+
 # persistent / runtime deps
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
@@ -58,10 +63,6 @@ ENV APP_ENV=dev XDEBUG_MODE=off
 VOLUME /app/var/
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-RUN apk add --no-cache \
-		gnupg \
-	;
 
 RUN set -eux; \
 	install-php-extensions \

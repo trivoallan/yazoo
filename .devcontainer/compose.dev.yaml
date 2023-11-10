@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  php:
+    volumes:
+      - ./../:/workspaces
+    network_mode: service:db
