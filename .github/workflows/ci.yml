@@ -56,11 +56,11 @@ jobs:
       -
         name: Create test database
         if: true # Remove this line if Doctrine ORM is installed
-        run: docker compose exec -T php bin/console -e test doctrine:database:create
+        run: docker compose exec -T php bin/console doctrine:database:create
       -
         name: Run migrations
         if: true # Remove this line if Doctrine Migrations is installed
-        run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
+        run: docker compose exec -T php bin/console doctrine:migrations:migrate --no-interaction
       -
         name: Run PHPUnit
         if: false # Remove this line if PHPUnit is installed
@@ -68,7 +68,7 @@ jobs:
       -
         name: Doctrine Schema Validator
         if: false # Remove this line if Doctrine ORM is installed
-        run: docker compose exec -T php bin/console -e test doctrine:schema:validate
+        run: docker compose exec -T php bin/console doctrine:schema:validate
   lint:
     name: Docker Lint
     runs-on: ubuntu-latest
