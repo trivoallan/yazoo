@@ -43,8 +43,8 @@ jobs:
         name: Inspect services
         if: always()
         run: |
-          docker inspect yazoo-php-1 yazoo-db-1
-          docker compose logs
+          docker inspect yazoo-db-1
+          docker compose logs yazoo-db-1
       -
         name: Check HTTP reachability
         run: curl -v http://localhost
