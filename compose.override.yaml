@@ -13,8 +13,6 @@ services:
       # If you develop on Mac or Windows you can remove the vendor/ directory
       #  from the bind-mount for better performance by enabling the next line:
       #- /app/vendor
-    environment:
-      DATABASE_URL: "mysql://mariadb:mariadb@db:3306/yazoo?serverVersion=8.0.34&charset=utf8mb4"
     # extra_hosts:
     #   # Ensure that host.docker.internal is correctly defined on Linux
     #   - host.docker.internal:host-gateway

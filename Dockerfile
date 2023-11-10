@@ -29,6 +29,7 @@ RUN set -eux; \
 		apcu \
 		intl \
 		opcache \
+		pdo_mysql \
 		zip \
 	;
 
@@ -57,6 +58,10 @@ ENV APP_ENV=dev XDEBUG_MODE=off
 VOLUME /app/var/
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+RUN apk add --no-cache \
+		gnupg \
+	;
 
 RUN set -eux; \
 	install-php-extensions \
