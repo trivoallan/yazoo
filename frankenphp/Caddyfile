@@ -1,5 +1,5 @@
 {
-	email {$CADDY_EMAIL:-yazoo@${APP_DOMAIN}}
+	email {$CADDY_EMAIL:-yazoo@localhost}
 	{$CADDY_GLOBAL_OPTIONS}
 
 	frankenphp {
