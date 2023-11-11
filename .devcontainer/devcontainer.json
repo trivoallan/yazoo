@@ -30,7 +30,8 @@
 				"github.vscode-github-actions",
 				"bmewburn.vscode-intelephense-client",
 				"redhat.vscode-yaml",
-				"GitHub.vscode-pull-request-github"
+				"GitHub.vscode-pull-request-github",
+				"ms-vscode-remote.remote-containers"
 			]
 		}
 	}
