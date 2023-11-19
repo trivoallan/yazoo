@@ -6,33 +6,11 @@
 	"service": "php",
 	"workspaceFolder": "/app",
 	"forwardPorts": [80, 443, 2019, 3306],
-	"portsAttributes": {
-		"80": {
-			"label": "App",
-			"onAutoForward": "ignore"
-		},
-		"443": {
-			"label": "App",
-			"onAutoForward": "notify"
-		},
-		"2019": {
-			"label": "Metrics",
-			"onAutoForward": "silent"
-		},
-		"3306": {
-			"label": "Database Server",
-			"onAutoForward": "notify"
-		}
-	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"github.vscode-github-actions",
-				"bmewburn.vscode-intelephense-client",
-				"redhat.vscode-yaml",
 				"GitHub.vscode-pull-request-github",
-				"ms-vscode-remote.remote-containers"
-			]
+				"github.vscode-github-actions"			]
 		}
 	}
 }

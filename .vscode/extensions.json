@@ -1,7 +1,8 @@
 {
     "recommendations": [
+        "bajdzis.vscode-database",
         "github.vscode-github-actions",
         "github.codespaces",
-        "bajdzis.vscode-database"
+        "ms-vscode-remote.remote-containers"
     ]
 }
