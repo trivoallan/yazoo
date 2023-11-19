@@ -11,7 +11,7 @@ on:
   pull_request:
     branches:
       - main
-      
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -24,7 +24,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-      # 
+      #
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,14 +51,14 @@ jobs:
           target: frankenphp_prod
           push: false
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}         
-      -  
+          labels: ${{ steps.meta.outputs.labels }}
+      -
         name: Test
         env:
           IMAGE_NAME: ${{ steps.meta.outputs.tags }}
         run: |
           docker compose up --wait --no-build db
-          sleep 15
+          sleep 30
           docker compose up --wait --no-build php
 
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
