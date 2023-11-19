@@ -5,7 +5,18 @@
 	"dockerComposeFile": ["../compose.yaml", "compose.dev.yaml"],
 	"service": "php",
 	"workspaceFolder": "/app",
-	"forwardPorts": [80, 443, 2019, 3306],
+	"forwardPorts": [443, 3306],
+	"portsAttributes": {
+		"443": {
+			"label": "Application",
+			"onAutoForward": "notify",
+			"protocol": "https"
+		},
+		"3306": {
+			"label": "MariaDB",
+			"onAutoForward": "silent"
+		}
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
