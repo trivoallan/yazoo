@@ -70,7 +70,7 @@ jobs:
       - name: Test
         env:
           IMAGE_NAME: ${{ steps.meta.outputs.tags }}
-          MARIADB_HOST: localhost
+          MARIADB_HOST: 127.0.0.1
         run: |
           docker compose up --wait --no-build --no-deps php || docker compose logs && exit 1
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
