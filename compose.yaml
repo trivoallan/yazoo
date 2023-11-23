@@ -4,8 +4,8 @@ services:
   php:
     restart: unless-stopped
     image: ${IMAGE_NAME-yazoo:latest}
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     build:
       context: .
       target: frankenphp_dev
@@ -20,10 +20,8 @@ services:
     restart: unless-stopped
     volumes:
       - mariadb-data:/var/lib/mysql
-      - ./etc/yazoo.sql:/docker-entrypoint-initdb.d/00_yazoo.sql
     env_file:
       - etc/defaults.env
-
 
 volumes:
   caddy_data:
