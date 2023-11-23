@@ -30,6 +30,7 @@ services:
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/mysql
+    env_file: stack.env
 
 volumes:
   db_data: {}
