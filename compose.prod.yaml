@@ -11,8 +11,8 @@ services:
       context: .
       target: frankenphp_prod
     networks:
-      - default
       - public
+      - default
     labels:
       - traefik.docker.network=net-pastis-hosting-docker_public
       - traefik.enable=true
@@ -31,6 +31,8 @@ services:
     env_file:
       - .env
       - stack.env
+    networks:
+      - default
 
 volumes:
   db_data: {}
