@@ -20,7 +20,7 @@ env:
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
-    container: node:10.18-jessie
+    container: debian:stable-slim
     # trunk-ignore(checkov/CKV2_GHA_1)
     permissions:
       contents: read
