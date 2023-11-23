@@ -11,6 +11,7 @@ services:
       context: .
       target: frankenphp_prod
     networks:
+      - default
       - public
     labels:
       - traefik.docker.network=net-pastis-hosting-docker_public
@@ -27,11 +28,10 @@ services:
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/mysql
+      - ./etc/grants.sql:/docker-entrypoint-initdb.d/00_grants.sql
     env_file:
       - .env
       - stack.env
-    networks:
-      - public
 
 volumes:
   db_data: {}
