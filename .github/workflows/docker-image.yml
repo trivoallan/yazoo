@@ -29,6 +29,9 @@ jobs:
       MARIADB_DATABASE: yazoo
       MARIADB_USER: yazoo
       MARIADB_PASSWORD: yazoo
+      MARIADB_VERSION: 10.3.38
+      MARIADB_CHARSET: utf8mb4
+      MARIADB_PORT: 3306
 
     services:
       db:
@@ -77,6 +80,7 @@ jobs:
           MARIADB_DATABASE: ${{ env.MARIADB_DATABASE }}
           MARIADB_USER: ${{ env.MARIADB_USER }}
           MARIADB_PASSWORD: ${{ env.MARIADB_PASSWORD }}
+          DATABASE_URL: mysql://${{ env.MARIADB_USER }}:${{ env.MARIADB_PASSWORD }}@${{ env.MARIADB_HOST }}:${{ env.MARIADB_PORT }}/${{ env.MARIADB_DATABASE }}?serverVersion=${{ env.MARIADB_VERSION }}&charset=${{ env.MARIADB_CHARSET }}
         run: |
           docker compose up --wait --no-build --no-deps php || docker compose logs && exit 1
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
