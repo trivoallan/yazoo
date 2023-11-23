@@ -4,6 +4,8 @@ networks:
   public:
     external: true
     name: net-pastis-hosting-docker_public
+  default:
+    driver: bridge
 
 services:
   php:
@@ -28,7 +30,6 @@ services:
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/mysql
-      - ./etc/grants.sql:/docker-entrypoint-initdb.d/00_grants.sql
     env_file:
       - .env
       - stack.env
