@@ -6,8 +6,8 @@ on:
     branches:
       - main
     tags:
-      - "v*.*.*"
-  workflow_dispatch:
+      - v*.*.*
+  workflow_dispatch: {}
   pull_request:
     branches:
       - main
@@ -36,6 +36,9 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         env:
           MARIADB_RANDOM_ROOT_PASSWORD: true
+          MARIADB_DATABASE: ${{ env.MARIADB_DATABASE }}
+          MARIADB_USER: ${{ env.MARIADB_USER }}
+          MARIADB_PASSWORD: ${{ env.MARIADB_PASSWORD }}
         ports:
           - 3306:3306
 
@@ -71,6 +74,9 @@ jobs:
         env:
           IMAGE_NAME: ${{ steps.meta.outputs.tags }}
           MARIADB_HOST: 127.0.0.1
+          MARIADB_DATABASE: ${{ env.MARIADB_DATABASE }}
+          MARIADB_USER: ${{ env.MARIADB_USER }}
+          MARIADB_PASSWORD: ${{ env.MARIADB_PASSWORD }}
         run: |
           docker compose up --wait --no-build --no-deps php || docker compose logs && exit 1
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
