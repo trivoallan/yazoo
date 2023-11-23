@@ -20,7 +20,6 @@ services:
     env_file:
       - .env
       - stack.env
-    entrypoint: docker-php-entrypoint
 
   db:
     image: mariadb:${MARIADB_VERSION:-10.8.38}
