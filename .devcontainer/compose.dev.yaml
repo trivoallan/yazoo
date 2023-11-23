@@ -7,3 +7,25 @@ services:
       - ./frankenphp/Caddyfile:/etc/caddy/Caddyfile:ro
       - ./frankenphp/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
       - ./../:/workspaces
+    network_mode: service:adminer
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:${MARIADB_VERSION:-10.3.38}
+    restart: unless-stopped
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    env_file:
+      - etc/defaults.env
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file:
+      - etc/defaults.env
+
+volumes:
+  mariadb-data: {}
