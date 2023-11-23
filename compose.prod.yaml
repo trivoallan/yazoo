@@ -16,7 +16,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.yazoo-php.entrypoints=http
       - traefik.http.routers.yazoo-php.rule=Host(`yazoo.constructions-incongrues.net`)
-      - traefik.http.services.yazoo-php.loadbalancer.server.port=443
+      - traefik.http.services.yazoo-php.loadbalancer.server.port=8000
     env_file:
       - .env
       - stack.env
