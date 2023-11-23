@@ -6,7 +6,7 @@ on:
     branches:
       - main
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
   workflow_dispatch:
   pull_request:
     branches:
@@ -20,6 +20,7 @@ env:
 jobs:
   build-test-push:
     runs-on: ubuntu-latest
+    container: node:10.18-jessie
     # trunk-ignore(checkov/CKV2_GHA_1)
     permissions:
       contents: read
@@ -64,8 +65,7 @@ jobs:
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      -
-        name: Test
+      - name: Test
         env:
           IMAGE_NAME: ${{ steps.meta.outputs.tags }}
         run: |
