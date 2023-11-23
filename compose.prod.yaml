@@ -4,7 +4,7 @@ networks:
   public:
     external: true
     name: net-pastis-hosting-docker_public
-  default:
+  yazoonet:
     driver: bridge
 
 services:
@@ -13,7 +13,7 @@ services:
       context: .
       target: frankenphp_prod
     networks:
-      - default
+      - yazoonet
       - public
     labels:
       - traefik.docker.network=net-pastis-hosting-docker_public
