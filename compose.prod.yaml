@@ -33,6 +33,8 @@ services:
       - db_data:/var/lib/mysql
     env_file:
       - stack.env
+    networks:
+      - default
 
 volumes:
   db_data: {}

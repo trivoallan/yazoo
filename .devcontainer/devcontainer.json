@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/php-mariadb
 {
 	"name": "PHP/MariaDB",
-	"dockerComposeFile": ["../compose.yaml", "compose.dev.yaml"],
+	"dockerComposeFile": ["compose.yaml"],
 	"service": "php",
 	"workspaceFolder": "/app",
 	"forwardPorts": [443, 8080],
