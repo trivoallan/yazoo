@@ -29,9 +29,9 @@ jobs:
       db:
         image: mariadb:10.3.38
         env:
-          MARIADB_DATABASE: MARIADB_DATABASE
-          MARIADB_USER: MARIADB_USER
-          MARIADB_PASSWORD: MARIADB_PASSWORD
+          MARIADB_DATABASE: yazoo
+          MARIADB_USER: yazoo
+          MARIADB_PASSWORD: yazoo
           MYSQL_RANDOM_ROOT_PASSWORD: true
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         ports:
@@ -66,6 +66,9 @@ jobs:
       - name: Test
         env:
           IMAGE_NAME: ${{ steps.meta.outputs.tags }}
+          MARIADB_DATABASE: yazoo
+          MARIADB_USER: yazoo
+          MARIADB_PASSWORD: yazoo
         run: |
           docker compose up --wait --no-build --no-deps php || docker compose logs
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
