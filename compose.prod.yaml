@@ -1,7 +1,6 @@
 version: '3.8'
 
 networks:
-  default: {}
   public:
     external: true
     name: net-pastis-hosting-docker_public
@@ -11,6 +10,8 @@ services:
     build:
       context: .
       target: frankenphp_prod
+    networks:
+      - public
     labels:
       - traefik.docker.network=net-pastis-hosting-docker_public
       - traefik.enable=true
@@ -29,6 +30,8 @@ services:
     env_file:
       - .env
       - stack.env
+    networks:
+      - public
 
 volumes:
   db_data: {}
