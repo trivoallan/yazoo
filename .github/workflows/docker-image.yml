@@ -25,17 +25,20 @@ jobs:
       contents: read
       packages: write
 
+    env:
+      MARIADB_DATABASE: yazoo
+      MARIADB_USER: yazoo
+      MARIADB_PASSWORD: yazoo
+
     services:
       db:
         image: mariadb:10.3.38
-        env:
-          MARIADB_DATABASE: yazoo
-          MARIADB_USER: yazoo
-          MARIADB_PASSWORD: yazoo
-          MYSQL_RANDOM_ROOT_PASSWORD: true
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        env:
+          MARIADB_RANDOM_ROOT_PASSWORD: true
         ports:
           - 3306:3306
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -63,12 +66,11 @@ jobs:
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
       - name: Test
         env:
           IMAGE_NAME: ${{ steps.meta.outputs.tags }}
-          MARIADB_DATABASE: yazoo
-          MARIADB_USER: yazoo
-          MARIADB_PASSWORD: yazoo
+          MARIADB_HOST: localhost
         run: |
           docker compose up --wait --no-build --no-deps php || docker compose logs
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
