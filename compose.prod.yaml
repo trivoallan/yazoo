@@ -25,6 +25,7 @@ services:
       - traefik.http.services.yazoo-php.loadbalancer.server.port=80
     env_file:
       - etc/defaults.env
+      - stack.env
 
   db:
     image: mariadb:${MARIADB_VERSION:-10.8.38}
@@ -33,6 +34,7 @@ services:
       - db_data:/var/lib/mysql
     env_file:
       - etc/defaults.env
+      - stack.env
 
 volumes:
   db_data: {}
