@@ -30,6 +30,8 @@ services:
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/mysql
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: true
     env_file: stack.env
 
 volumes:
