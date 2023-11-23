@@ -27,7 +27,6 @@ services:
       MARIADB_USER: ${MARIADB_USER:-yazoo}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD:-yazoo}
       MARIADB_DATABASE: ${MARIADB_DATABASE:-yazoo}
-    env_file: stack.env
 
   db:
     image: mariadb:${MARIADB_VERSION:-10.8.38}
@@ -38,7 +37,6 @@ services:
       MARIADB_USER: ${MARIADB_USER:-yazoo}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD:-yazoo}
       MARIADB_DATABASE: ${MARIADB_DATABASE:-yazoo}
-    env_file: stack.env
 
 volumes:
   db_data: {}
