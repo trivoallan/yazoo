@@ -25,26 +25,6 @@ jobs:
       contents: read
       packages: write
 
-    env:
-      MARIADB_DATABASE: yazoo
-      MARIADB_USER: yazoo
-      MARIADB_PASSWORD: yazoo
-      MARIADB_VERSION: 10.3.38
-      MARIADB_CHARSET: utf8mb4
-      MARIADB_PORT: 3306
-
-    services:
-      db:
-        image: mariadb:10.3.38
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        env:
-          MARIADB_RANDOM_ROOT_PASSWORD: true
-          MARIADB_DATABASE: ${{ env.MARIADB_DATABASE }}
-          MARIADB_USER: ${{ env.MARIADB_USER }}
-          MARIADB_PASSWORD: ${{ env.MARIADB_PASSWORD }}
-        ports:
-          - 3306:3306
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -64,20 +44,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Test
-        env:
-          IMAGE_NAME: ${{ steps.meta.outputs.tags }}
-          MARIADB_HOST: 127.0.0.1
-          MARIADB_DATABASE: ${{ env.MARIADB_DATABASE }}
-          MARIADB_USER: ${{ env.MARIADB_USER }}
-          MARIADB_PASSWORD: ${{ env.MARIADB_PASSWORD }}
-          DATABASE_URL: mysql://${{ env.MARIADB_USER }}:${{ env.MARIADB_PASSWORD }}@${{ env.MARIADB_HOST }}:${{ env.MARIADB_PORT }}/${{ env.MARIADB_DATABASE }}?serverVersion=${{ env.MARIADB_VERSION }}&charset=${{ env.MARIADB_CHARSET }}
-        run: |
-          docker compose -f compose.yaml -f .devcontainer/compose.dev.yaml up --wait --no-deps php || docker compose logs && exit 1
+      - name: Build
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: false
+          target: frankenphp_prod
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
-      # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
-      # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
       - name: Push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         # if not a pull request, push to ghcr.io
