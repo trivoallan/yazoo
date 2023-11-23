@@ -30,7 +30,9 @@ services:
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/mysql
-    env_file: .env
+    env_file:
+      - .env
+      - stack.env
     networks:
       - default
 
