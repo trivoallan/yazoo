@@ -1,20 +1,10 @@
 version: '3.8'
 
-networks:
-  public:
-    external: true
-    name: net-pastis-hosting-docker_public
-  yazoonet:
-    driver: bridge
-
 services:
   php:
     build:
       context: .
       target: frankenphp_prod
-    networks:
-      - yazoonet
-      - public
     labels:
       - traefik.docker.network=net-pastis-hosting-docker_public
       - traefik.enable=true
