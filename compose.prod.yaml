@@ -23,16 +23,20 @@ services:
       SERVER_NAME: yazoo.constructions-incongrues.net, php:80, php:443
       CADDY_EMAIL: tristan@constructions-incongrues.net
       CADDY_GLOBAL_OPTIONS: auto_https disable_redirects
+      MARIADB_HOST: yazoo-db
     env_file:
       - .env
+      - stack.env
 
   db:
+    container_name: yazoo-db
     image: mariadb:${MARIADB_VERSION:-10.8.38}
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/mysql
     env_file:
       - .env
+      - stack.env
 
 volumes:
   db_data: {}
