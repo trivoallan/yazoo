@@ -56,7 +56,7 @@ jobs:
       - name: Push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         # if not a pull request, push to ghcr.io
-        # if: github.event_name != 'pull_request'
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           context: .
           push: true
@@ -64,8 +64,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Deploy stack to Portainer
+      - name: Deploy
         uses: carlrygart/portainer-stack-deploy@v1
+        # if a tag, deploy to portainer
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           portainer-host: ${{ secrets.PORTAINER_HOST }}
           username: ${{ secrets.PORTAINER_USERNAME }}
