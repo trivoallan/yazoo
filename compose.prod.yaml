@@ -16,10 +16,15 @@ services:
       - traefik.enable=true
       - traefik.http.routers.yazoo-php.entrypoints=http
       - traefik.http.routers.yazoo-php.rule=Host(`yazoo.constructions-incongrues.net`)
-      - traefik.http.services.yazoo-php.loadbalancer.server.port=80
+      - traefik.http.services.yazoo-php.loadbalancer.server.port=443
+    environment:
+      APP_ENV: prod
+      APP_HOSTNAME: yazoo.constructions-incongrues.net
+      SERVER_NAME: yazoo.constructions-incongrues.net, php:80, php:443
+      CADDY_EMAIL: tristan@constructions-incongrues.net
+      CADDY_GLOBAL_OPTIONS: auto_https disable_redirects
     env_file:
       - .env
-      - stack.env
 
   db:
     image: mariadb:${MARIADB_VERSION:-10.8.38}
@@ -28,7 +33,6 @@ services:
       - db_data:/var/lib/mysql
     env_file:
       - .env
-      - stack.env
 
 volumes:
   db_data: {}
