@@ -18,15 +18,11 @@ services:
       - traefik.http.routers.yazoo-php.rule=Host(`yazoo.constructions-incongrues.net`)
       - traefik.http.services.yazoo-php.loadbalancer.server.port=443
     environment:
-      APP_ENV: prod
-      APP_HOSTNAME: yazoo.constructions-incongrues.net
-      SERVER_NAME: yazoo.constructions-incongrues.net, php:80, php:443
-      CADDY_EMAIL: tristan@constructions-incongrues.net
-      CADDY_GLOBAL_OPTIONS: auto_https disable_redirects
       MARIADB_HOST: yazoo-db
     env_file:
       - .env
       - stack.env
+    restart: unless-stopped
 
   db:
     container_name: yazoo-db
