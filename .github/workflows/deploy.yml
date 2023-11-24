@@ -1,0 +1,22 @@
+# trunk-ignore-all(checkov/CKV2_GHA_1)
+name: Deploy to Portainer
+
+on:
+  registry_package:
+    types: [published]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy to Portainer
+        uses: datntdev0/action-deploy-to-portainer@v0.1.0
+        with:
+          portainerHost: ${{ secrets.PORTAINER_HOST }}
+          portainerApiKey: ${{ secrets.PORTAINER_API_KEY }}
+          portainerEnvId: ${{ secrets.PORTAINER_ENV_ID }}
+          portainerStackName: yazoo
+          portainerFilePath: ./compose.prod.yaml
