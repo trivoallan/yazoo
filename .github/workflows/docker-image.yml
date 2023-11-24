@@ -56,10 +56,19 @@ jobs:
       - name: Push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         # if not a pull request, push to ghcr.io
-        if: github.event_name != 'pull_request'
+        # if: github.event_name != 'pull_request'
         with:
           context: .
           push: true
           target: frankenphp_prod
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Deploy to Portainer
+        uses: datntdev0/action-deploy-to-portainer@v0.1.0
+        with:
+          portainerHost: ${{ secrets.PORTAINER_HOST }}
+          portainerApiKey: ${{ secrets.PORTAINER_API_KEY }}
+          portainerEnvId: ${{ secrets.PORTAINER_ENV_ID }}
+          portainerStackName: yazoo
+          portainerFilePath: ./compose.prod.yaml
