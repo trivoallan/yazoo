@@ -1,4 +1,4 @@
-name: Docker Image
+name: Continuous Delivery
 
 # Configures this workflow to run every time a change is pushed to the branch called `release`.
 on:
